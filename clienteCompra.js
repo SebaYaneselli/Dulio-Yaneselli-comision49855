@@ -1,140 +1,55 @@
-/// 
-confirm("Gracias por entrar a TheGLAM.uy"+ "\n"+ "Tenemos una sorpresa para los clientes" )
-let nombreCliente = prompt("Ingrese su nombre completo")
-let dni = prompt ("Ingrese su DNI para acceder al regalo")
+alert("Para consultar stock en consola filtrarStock()" + "\n"+ "Para agregar nuevos productos en consola nuevoIngreso() ")
 
-
-let productosApagar;
-let descripcionProductoAPagar;
-let primeraCompraCliente=0;
-let descuentoAaplicar=0;
-let preciolista;
-let mensajeDespedidaalert;
-
-
-while (primeraCompraCliente !==1 && primeraCompraCliente  !==2 ){
-    primeraCompraCliente=+prompt("⚠️ Solo debes ingresar el número de la opción:"+ "\n"+ "\n"
-    +"Ingresa: 1, Si es la PRIMERA vez que compras"+ "\n"
-    +"Ingresa: 2, Si ya COMPRASTE ANTES "+ "\n" )
-
-}   
-
-if (primeraCompraCliente===1)
-{
-        alert("Gracias por elegirnos!!"+ "\n" + "\n" 
-            +"Te damos la bienvenida a TheGLAM.uy  😎"+ "\n"+ "\n"
-            +"Nos pone contento tener clientes nuevos, por eso te damos un descuento del 15% en esta compra🎉🎈"          
-        );
+const Producto = function(nombre,coleccion,tipo,stock){
+    this.nombre = nombre
+    this.coleccion = coleccion
+    this.tipo = tipo
+    this.stock = stock
 }
-    else
-{
-        alert("Gracias por volver a confiar en nosotros!!"+ "\n" + "\n"+ 
-            "Aqui tu tienes tu descuento de 10%  🎉🎈 "          
-        );
+//lista de productos//
+let producto1= new Producto ("Rubi","Europea", "bolso", 130)
+let producto2= new Producto ("Aurora","Europea", "bolso", 115)
+let producto3= new Producto ("Nuria","Vintage", "cartera", 90)
+let producto4= new Producto ("Mia","Vintage", "cartera", 84)
+let producto5= new Producto ("Amaia","Summer24", "mochila", 75)
+let producto6= new Producto ("Petunia","Summer24", "mochila", 55)
+let producto7= new Producto ("Rumba","Casual", "mochila", 13)
+let producto8= new Producto ("Carmel","Casual", "monedero", 10)
+let producto9= new Producto ("Oxford","USA", "monedero", 9)
 
+let lista = [producto1,producto2,producto3,producto4,producto5,producto6,producto7,producto8,producto9]
 
+//consulta de stock//
+function filtrarStock(){
+    let articulo = prompt("Consultar stock?").trim().toUpperCase()
+    let resultado = lista.filter((producto)=> producto.nombre.toUpperCase().includes(articulo))
+
+    if (resultado.length > 0){
+        console.table(resultado)
+    }else{
+        alert("no se encontro: "+ articulo)
+    }
 }
+//ingresar mercaderia a el stock//
+function nuevoIngreso(){
+    let nombre = prompt("ingresa el nombre").trim()
+    let coleccion = prompt("ingresa la collecion").trim()
+    let tipo = prompt("ingresa el tipo").trim()
+    let stock = parseInt(prompt("ingresa la cantidad de stock"))
 
-
-let comprarOtroProducto=1
-
-while (comprarOtroProducto==1) {
-    productosApagar = +prompt(
-        "Seleccione el producto que quiere aplicar el descuento digitando el número correspondiente"+ "\n" + "\n" 
-        +"1-Cartera Rumba UYU 1030"+ "\n"
-        +"2-Bolso Kelly UYU 1590" + "\n" 
-        +"3-Cartera de mano UYU 490"+ "\n" 
-    )
     
-    while (productosApagar !==1 && productosApagar  !== 2 && productosApagar  !== 3){
-        productosApagar = +prompt("Solo debes ingresar el Codigo ⚠️ :"+ "\n"+ "\n"
-        +"1-Cartera Rumba UYU 1030"+ "\n"
-        +"2-Bolso Kelly UYU 1590" + "\n" 
-        +"3-Cartera de mano UYU 490"+ "\n" 
-        )
-
-    }   
-
-
-    switch(productosApagar){
-        case 1: preciolista=1030; 
-        break;
-        case 2: preciolista=1590; 
-        break;
-        case 3: preciolista=490; 
-        break;
-        default : alert("No seleccionaste un producto a pagar");
-        break;
+    if(isNaN(stock) || nombre=="" || coleccion=="" || tipo==""){
+        alert("porfavor, ingresa valores validos")
+        return
     }
 
-    switch(productosApagar){
-        case 1: descripcionProductoAPagar="Cartera Rumba"; 
-        break;
-        case 2: descripcionProductoAPagar="Bolso Kelly"; 
-        break;
-        case 3: descripcionProductoAPagar="Cartera de mano"; 
-        break;
-        default : alert("No seleccionaste un producto a pagar");
-        break;
-    }
-    
-    switch(primeraCompraCliente){
-        case 1: descuentoAaplicar = 0.15; 
-        break;
-        case 2: descuentoAaplicar = 0.10;    
-        default :0;
-        break;
-    }
-
-    totalClienteAPagar= parseFloat(preciolista * (1-descuentoAaplicar))
-
-
-    alert("Solamente pagarás "+ " " + "UYU "+ totalClienteAPagar+ " por tu "+descripcionProductoAPagar+" 😎");
-
-    comprarOtroProducto = +prompt(
-        "Aprovecha el descuento y comprate otro producto!! "+ "\n" + "\n" 
-        +"Ingresa: 1-SI, vas a comprar Otro"+ "\n"
-        +"Ingresa: 2-Si NO " 
-    )
-
-    while (comprarOtroProducto !==1 && comprarOtroProducto !== 2){
-        comprarOtroProducto=+prompt(" ⚠️ Solo puedes ingresar las opciones (1) o (2)")
+    let producto = new Producto(nombre,coleccion,tipo,stock)
+    if (lista.some((p)=> p.nombre === producto.nombre)){
+        alert("el producto ya existe en la lista")
+        return
 
     }
 
-
-};
-
-mensajeDespedidaalert = alert("Gracias por tu compra 🤩🤗💪, te esperamos nuevamente !");
-
-/* let clienteDescuentaIva
-const IVA = 0.22
-
-
-while (clienteDescuentaIva==1 || clienteDescuentaIva==2)
-{totalClienteAPagar= +prompt(
-    "tenes empresa con RUT podes descontar el iva de tus compras!! "+ "\n" + "\n" 
-    +"Ingresa: 1-Si tienes empresa"+ "\n"
-    +"Ingresa: 2-Si no tienes empresa " 
-)
+    lista.push(producto)
+    console.table(lista)
 }
-if (clienteDescuentaIva ===1) 
-{     descuentoiva =(function (totalClienteAPagar, IVA) { 
-    return totalClienteAPagar*IVA
-})(totalClienteAPagar,IVA)
-
-    alert ("el importe con descuentos es : " + descuentoiva)
-
-
-} else mensajeDespedidaalert = alert("Gracias por tu compra 🤩🤗💪, te esperamos nuevamente !"); */
-
-
-
-
-
-
-
-
-
-
-
