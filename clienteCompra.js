@@ -7,15 +7,15 @@ const Producto = function(nombre,coleccion,tipo,stock){
     this.stock = stock
 }
 //lista de productos//
-let producto1= new Producto ("Rubi","Europea", "bolso", 130)
-let producto2= new Producto ("Aurora","Europea", "bolso", 115)
-let producto3= new Producto ("Nuria","Vintage", "cartera", 90)
-let producto4= new Producto ("Mia","Vintage", "cartera", 84)
-let producto5= new Producto ("Amaia","Summer24", "mochila", 75)
-let producto6= new Producto ("Petunia","Summer24", "mochila", 55)
-let producto7= new Producto ("Rumba","Casual", "mochila", 13)
-let producto8= new Producto ("Carmel","Casual", "monedero", 10)
-let producto9= new Producto ("Oxford","USA", "monedero", 9)
+let producto1= new Producto ("rubi","europea","bolso", 130)
+let producto2= new Producto ("aurora","europea","bolso", 115)
+let producto3= new Producto ("nuria","vintage","cartera", 90)
+let producto4= new Producto ("mia","vintage","cartera", 84)
+let producto5= new Producto ("amaia","summer24","mochila", 75)
+let producto6= new Producto ("petunia","summer24","mochila", 55)
+let producto7= new Producto ("rumba","casual","mochila", 13)
+let producto8= new Producto ("carmel","casual","monedero", 10)
+let producto9= new Producto ("oxford","USA","monedero", 9)
 
 let lista = [producto1,producto2,producto3,producto4,producto5,producto6,producto7,producto8,producto9]
 
@@ -44,10 +44,9 @@ function nuevoIngreso(){
     }
 
     let producto = new Producto(nombre,coleccion,tipo,stock)
-    if (lista.some((p)=> p.nombre === producto.nombre)){
+    if (lista.some((p)=> p.nombre === producto.nombre.toLowerCase())){
         alert("el producto ya existe en la lista")
         return
-
     }
 
     lista.push(producto)
